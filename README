@@ -2,4 +2,4 @@ init
 
 android studio create osp
 
-two commit
+git branch -d origin
