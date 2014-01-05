@@ -38,3 +38,14 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
 }
+
+plugin: "sonar-runner"
+
+sonarRunner {
+	sonarProperties {
+	    property "sonar.host.url", "http://localhost:9000"
+	    property "sonar.jdbc.url", "jdbc:postgresql://localhost/sonar"
+	    property "sonar.jdbc.username", "verify"
+	    property "sonar.jdbc.password", "verify"	
+	}
+}
