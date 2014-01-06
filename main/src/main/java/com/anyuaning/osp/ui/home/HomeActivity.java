@@ -14,5 +14,7 @@ public class HomeActivity extends Activity {
         super.onCreate(bundle);
 
         setContentView(R.layout.activity_home);
+
+        Toast.makeText(this, "jenkins gerrit build", Toast.LENGTH_SHORT).show();
     }
 }
