@@ -2,7 +2,6 @@ package com.anyuaning.osp.ui.home;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.anyuaning.osp.R;
 
@@ -16,6 +15,5 @@ public class HomeActivity extends Activity {
 
         setContentView(R.layout.activity_home);
 
-        Toast.makeText(this, "jenkins gerrit build", Toast.LENGTH_SHORT).show();
     }
 }

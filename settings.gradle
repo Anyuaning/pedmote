@@ -1,1 +1,9 @@
-include ':main'
+include ':main', ':libraries:pulltorefresh'
+
+include 'libraries:actionbarsherlock'
+include 'libraries:slidingmenu'
+include 'libraries:viewpagerindicator'
+include 'libraries:dragsortlistview'
+include 'libraries:pulltorefresh'
+
+
