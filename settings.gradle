@@ -1,9 +1,10 @@
-include ':main', ':libraries:pulltorefresh'
+include ':main'
 
 include 'libraries:actionbarsherlock'
 include 'libraries:slidingmenu'
 include 'libraries:viewpagerindicator'
 include 'libraries:dragsortlistview'
 include 'libraries:pulltorefresh'
-
+include 'libraries:appmsg'
+include 'libraries:asynchttp'
 
