@@ -21,9 +21,11 @@ public class ItemFragment extends SherlockFragment {
         TextView tv = (TextView) convertView.findViewById(R.id.tv_item);
 
         Bundle argBundle = getArguments();
-        String title = argBundle.getString("arg");
+        if (null != argBundle) {
+            String title = argBundle.getString("arg");
 
-        tv.setText(title);
+            tv.setText(title);
+        }
 
         return convertView;
     }

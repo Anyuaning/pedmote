@@ -10,9 +10,8 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.home.HomeActivity" />
-
-        <activity android:name=".ui.home.OpenMainActivity" >
+        <activity android:name=".ui.home.OpenMainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

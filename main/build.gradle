@@ -13,6 +13,8 @@ dependencies {
     compile project(':libraries:pulltorefresh')
     compile project(':libraries:appmsg')
     compile project(':libraries:asynchttp')
+    compile project(':libraries:daocore')
+    compile project(':libraries:daogenerator')
 
     androidTestCompile 'junit:junit:4.11'
     androidTestCompile 'org.robolectric:robolectric:2.1'
@@ -28,6 +30,11 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+
+        testPackageName "com.anyuaning.osp.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+//        testHandlingProfiling true
+        testFunctionalTest true
     }
     buildTypes {
         release {
@@ -40,4 +47,11 @@ android {
             proguardFile 'proguard-rules.txt'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
+
+

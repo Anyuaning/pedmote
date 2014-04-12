@@ -1,9 +1,12 @@
 package com.anyuaning.osp.ui.home;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
@@ -12,8 +15,10 @@ import com.actionbarsherlock.view.SubMenu;
 import com.anyuaning.osp.R;
 import com.anyuaning.osp.ui.adapter.TabFragmentPagerAdapter;
 import com.anyuaning.osp.ui.adapter.TabPagerAdapter;
+import com.anyuaning.osp.ui.base.BaseFragmentActivity;
 import com.anyuaning.osp.ui.fragment.ItemFragment;
 import com.anyuaning.osp.ui.fragment.PullListFragment;
+import com.anyuaning.osp.ui.fragment.stopwatch.StopWatchFragment;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.extras.viewpager.PullToRefreshViewPager;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -21,6 +26,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class OpenMainActivity extends BaseFragmentActivity implements
         ActionBar.TabListener, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener {
@@ -39,16 +45,79 @@ public class OpenMainActivity extends BaseFragmentActivity implements
 
     private List<Fragment> mListFragment;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setTheme(com.actionbarsherlock.R.style.Theme_Sherlock_Light);
         super.onCreate(savedInstanceState);
 
-        setBehindContentView(R.layout.left_menu);
         setContentView(R.layout.activity_openmain);
+//
+//        setupData();
+//        setupView();
+//        setupStopWatch();
 
-        setupData();
-        setupView();
+        switchContent(new StopWatchFragment());
+    }
+
+    private void setupStopWatch() {
+        List<Fragment> fragments = new Vector<Fragment>();
+        fragments.add(Fragment.instantiate(this, StopWatchFragment.class.getName()));
+//        fragments.add(Fragment.instantiate(this, CountDownFragment.class.getName()));
+
+        mViewPager = (ViewPager) findViewById(R.id.vp_main);
+
+        PagerAdapter pagerAdapter = new StopWatchPagerAdapter(getSupportFragmentManager(), fragments);
+
+        mViewPager.setAdapter(pagerAdapter);
+
+
+    }
+
+    /**
+     * switch menu fragment
+     * @param fragment
+     */
+    public void switchContent(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit();
+
+        new Handler() {
+
+        }.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                getSlidingMenu().showContent();
+            }
+        }, 50);
+
+    }
+
+    class StopWatchPagerAdapter extends FragmentStatePagerAdapter {
+
+        private final List<Fragment> fragments;
+
+        public StopWatchPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            if (null == fragments) {
+                return 0;
+            }
+            return fragments.size();
+        }
+
+
     }
 
     private void setupView() {
@@ -94,19 +163,7 @@ public class OpenMainActivity extends BaseFragmentActivity implements
         indicator.setSnap(true);
         indicator.setOnPageChangeListener(this);
 
-        // sliding menu
-//        SlidingMenu slidingMenu = new SlidingMenu(this);
-        SlidingMenu slidingMenu = getSlidingMenu();
-        slidingMenu.setMode(SlidingMenu.LEFT);
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//        slidingMenu.setShadowWidth(30);
-//        slidingMenu.setSelectorDrawable();
-//        slidingMenu.setBehindOffset(60);
-        slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-        slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-//        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        slidingMenu.setFadeDegree(0.35f);
-        slidingMenu.setMenu(R.layout.left_menu);
+
 
     }
 

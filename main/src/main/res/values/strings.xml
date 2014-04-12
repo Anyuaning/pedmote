@@ -1,5 +1,15 @@
-<resources>
-    <string name="app_name">OpenSourceProject</string>
+<resources
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Timing</string>
 
     <string name="title_activity_base_fragment">BaseFragment</string>
+    <string name="chronometer_initial_format">%s</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_reset">Reset</string>
+    <string name="btn_stop">Stop</string>
+    <string name="exeception_mediaplayer_datasource">设置音乐的数居源失败</string>
+    <string name="exeception_mediaplayer_prepare">准备播放音乐时出现异常</string>
+    <string translatable="false" name="duration_format_short"><xliff:g id="format">%2$d:%5$02d</xliff:g></string>
+    <string translatable="false" name="duration_format_long"><xliff:g id="format">%2$d:%5$02d</xliff:g></string>
+    <string name="music_unkown_artist">未知</string>
 </resources>

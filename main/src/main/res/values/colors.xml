@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="offical_color_blue">#33B5E5</color>
+    <color name="offical_color_blue_deep">#0099CC</color>
+    <color name="offical_color_purple">#AA66CC</color>
+    <color name="offical_color_purple_deep">#9933CC</color>
+    <color name="offical_color_green">#99CC00</color>
+    <color name="offical_color_green_deep">#669900</color>
+    <color name="offical_color_yellow">#FFBB33</color>
+    <color name="offical_color_yellow_deep">#FF8800</color>
+    <color name="offical_color_red">#FF4444</color>
+    <color name="offical_color_red_deep">#CC0000</color>
+</resources>

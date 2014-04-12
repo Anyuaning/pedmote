@@ -2,4 +2,9 @@
 <resources>
     <item type="id" name="drag_handle" />
     <item type="id" name="click_remove" />
+    <item name="label_menu_sports" type="id">运动</item>
+    <item name="label_menu_music" type="id">音乐</item>
+    <item name="label_menu_statistics" type="id">统计</item>
+    <item name="label_menu_settings" type="id">设置</item>
+    <item name="label_menu_map" type="id">地图</item>
 </resources>

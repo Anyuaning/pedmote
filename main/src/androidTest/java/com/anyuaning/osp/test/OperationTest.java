@@ -1,5 +1,6 @@
 package com.anyuaning.osp.test;
 
+
 import org.junit.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;
