@@ -5,10 +5,14 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application android:allowBackup="true"
+        android:name=".OspApplication"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme">
+
 
         <activity android:name=".ui.home.OpenMainActivity"
             android:configChanges="orientation|screenSize">
@@ -17,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".service.music.MusicPlayerService">
+            <intent-filter>
+                <action android:name="com.anyuaning.osp.action.MUSIC_SERVICE" />
+            </intent-filter>
+        </service>
 
     </application>
 

@@ -23,15 +23,16 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDir 'src'
+            srcDir 'src/main/java'
         }
         resources {
-            srcDir 'src-template'
+            srcDir 'src/main/template'
+            output.resourcesDir = "${buildDir}/classes/main/template"
         }
     }
     test {
         java {
-            srcDir 'src-test'
+            srcDir 'src/test'
         }
     }
 }

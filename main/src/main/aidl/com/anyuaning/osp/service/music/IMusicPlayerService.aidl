@@ -2,12 +2,13 @@ package com.anyuaning.osp.service.music;
 
 interface IMusicPlayerService {
 
-    /**
-     * play music
-     * @param albumCursorPosition
-     * @param songCursorPosition
-     **/
-    void play(int albumCursorPosition, int songCursorPosition);
+    void open(in long[] list, int position);
+
+    void openFile(String path);
+
+    void play();
+
+    void playFile(String path);
 
     boolean isPlaying();
 

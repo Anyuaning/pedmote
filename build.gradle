@@ -4,11 +4,14 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
+//        maven {
+//            url "http://oss.sonatype.org/content/repositories/snapshots"
+//        }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:0.9.1'
-        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
+//        classpath 'com.novoda.gradle:robolectric-plugin:0.0.1-SNAPSHOT'
     }
 }
 
@@ -17,6 +20,10 @@ allprojects {
 
     repositories {
         mavenCentral()
+
+//        maven {
+//            url "http://oss.sonatype.org/content/repositories/snapshots"
+//        }
     }
 }
 

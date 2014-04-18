@@ -1,5 +1,6 @@
 package com.anyuaning.osp.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
 import com.anyuaning.osp.R;
+import com.anyuaning.osp.config.OspAction;
 import com.anyuaning.osp.ui.adapter.TabFragmentPagerAdapter;
 import com.anyuaning.osp.ui.adapter.TabPagerAdapter;
 import com.anyuaning.osp.ui.base.BaseFragmentActivity;
@@ -57,6 +59,17 @@ public class OpenMainActivity extends BaseFragmentActivity implements
 //        setupStopWatch();
 
         switchContent(new StopWatchFragment());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Intent musicIntent = new Intent();
+        musicIntent.setAction(OspAction.ACTION_MUSIC_SERVICE);
+        stopService(musicIntent);
+
+        System.exit(1);
     }
 
     private void setupStopWatch() {

@@ -11,3 +11,5 @@ include 'libraries:asynchttp'
 include 'libraries:daocore'
 include 'libraries:daogenerator'
 
+
+include 'tools:osp-aidjava'

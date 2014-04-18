@@ -1,22 +1,30 @@
 package com.anyuaning.osp.ui.fragment.music;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.ServiceConnection;
 import android.database.CharArrayBuffer;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anyuaning.osp.R;
+import com.anyuaning.osp.service.ServiceToken;
+import com.anyuaning.osp.service.music.IMusicPlayerService;
 import com.anyuaning.osp.utils.MediaUtils;
 import com.anyuaning.osp.utils.TimeUtils;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -24,13 +32,17 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 /**
  * Created by thom on 14-4-12.
  */
-public class MusicBrowserFragment extends Fragment {
+public class MusicBrowserFragment extends Fragment implements ServiceConnection {
 
-    private Context mContext;
+    private Activity mContext;
 
     private PullToRefreshListView mPullRefreshMusicList;
 
     private boolean isNowPlaying;
+
+    private ServiceToken mMusicServiceToken;
+
+    private IMusicPlayerService mMusicService;
 
     @Override
     public void onAttach(Activity activity) {
@@ -41,6 +53,7 @@ public class MusicBrowserFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMusicServiceToken = MediaUtils.bindToMusicService(mContext, this);
     }
 
     @Override
@@ -57,11 +70,66 @@ public class MusicBrowserFragment extends Fragment {
         mPullRefreshMusicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(mContext, "pos: " + position, Toast.LENGTH_SHORT).show();
+                Adapter adapter = null;
+                if (parent.getAdapter() instanceof HeaderViewListAdapter) {
+                    HeaderViewListAdapter listAdapter = (HeaderViewListAdapter) parent.getAdapter();
+                    adapter = listAdapter.getWrappedAdapter();
+                } else {
+                    adapter = parent.getAdapter();
+                }
+                if (adapter instanceof  MusicCursorAdapter) {
+                    MusicCursorAdapter cursorAdapter = (MusicCursorAdapter) adapter;
+                    Cursor cursor = cursorAdapter.getCursor();
+                    String songPath = cursor.getString(cursor.getColumnIndexOrThrow((MediaStore.Audio.Media.DATA)));
+                    Toast.makeText(mContext, "pos: " + songPath, Toast.LENGTH_SHORT).show();
+                    try {
+//                        mMusicService.playFile(songPath);
+//                        mMusicService.openFile(songPath);
+                        long[] list = getSongListForCursor(cursor);
+                        mMusicService.open(list, position);
+                        mMusicService.play();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         });
 
         return view;
+    }
+
+
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        mMusicService = IMusicPlayerService.Stub.asInterface(service);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+    private long[] getSongListForCursor(Cursor cursor) {
+        if (null == cursor) {
+            return new long[]{};
+        }
+
+        int len = cursor.getCount();
+        long[] list = new long[len];
+        cursor.moveToFirst();
+        int colidx = -1;
+        try {
+            colidx = cursor.getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members.AUDIO_ID);
+        } catch (IllegalArgumentException e) {
+            colidx = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
+        }
+        for (int i=0; i<len; i++) {
+            list[i] = cursor.getLong(colidx);
+            cursor.moveToNext();
+        }
+
+        return list;
     }
 
     class MusicCursorAdapter extends CursorAdapter {

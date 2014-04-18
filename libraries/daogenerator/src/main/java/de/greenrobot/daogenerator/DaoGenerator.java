@@ -62,12 +62,12 @@ public class DaoGenerator {
         config.setClassForTemplateLoading(this.getClass(), "/");
         config.setObjectWrapper(new DefaultObjectWrapper());
 
-        templateDao = config.getTemplate("dao.ftl");
-        templateDaoMaster = config.getTemplate("dao-master.ftl");
-        templateDaoSession = config.getTemplate("dao-session.ftl");
-        templateEntity = config.getTemplate("entity.ftl");
-        templateDaoUnitTest = config.getTemplate("dao-unit-test.ftl");
-        templateContentProvider = config.getTemplate("content-provider.ftl");
+        templateDao = config.getTemplate("template/dao.ftl");
+        templateDaoMaster = config.getTemplate("template/dao-master.ftl");
+        templateDaoSession = config.getTemplate("template/dao-session.ftl");
+        templateEntity = config.getTemplate("template/entity.ftl");
+        templateDaoUnitTest = config.getTemplate("template/dao-unit-test.ftl");
+        templateContentProvider = config.getTemplate("template/content-provider.ftl");
     }
 
     private Pattern compilePattern(String sectionName) {
