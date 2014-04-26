@@ -11,27 +11,4 @@
         android:textSize="@dimen/chronometer_size"
         android:format="@string/chronometer_initial_format"/>
 
-    <LinearLayout
-        android:layout_below="@+id/chronometer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2" >
-
-        <Button
-            android:id="@+id/btn_start_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_start" />
-
-        <Button
-            android:id="@+id/btn_reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_reset" />
-    </LinearLayout>
-
-
-
 </RelativeLayout>

@@ -9,6 +9,8 @@ public class Timing {
     private Long id;
     private java.util.Date startTime;
     private java.util.Date endTime;
+    private String startFormatterTime;
+    private String endFormatterTime;
     private Long length;
 
     public Timing() {
@@ -18,10 +20,12 @@ public class Timing {
         this.id = id;
     }
 
-    public Timing(Long id, java.util.Date startTime, java.util.Date endTime, Long length) {
+    public Timing(Long id, java.util.Date startTime, java.util.Date endTime, String startFormatterTime, String endFormatterTime, Long length) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.startFormatterTime = startFormatterTime;
+        this.endFormatterTime = endFormatterTime;
         this.length = length;
     }
 
@@ -47,6 +51,22 @@ public class Timing {
 
     public void setEndTime(java.util.Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getStartFormatterTime() {
+        return startFormatterTime;
+    }
+
+    public void setStartFormatterTime(String startFormatterTime) {
+        this.startFormatterTime = startFormatterTime;
+    }
+
+    public String getEndFormatterTime() {
+        return endFormatterTime;
+    }
+
+    public void setEndFormatterTime(String endFormatterTime) {
+        this.endFormatterTime = endFormatterTime;
     }
 
     public Long getLength() {

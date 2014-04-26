@@ -41,4 +41,36 @@ public class TimeUtils {
         return sFormatter.format(durationFormat, timeArgs).toString();
     }
 
+    /**
+     *
+     * @param context
+     * @param time
+     * @return
+     */
+    public static long convertTimeLong(Context context, String time) {
+        long secs = 0;
+
+        final String[] times = time.split(":");
+        if (times.length == 3) {
+            secs += toInt(times[2]);
+            secs += (toInt(times[1]) * 60);
+            secs += (toInt(times[0]) * 60 * 60);
+        } else if (times.length == 2) {
+            secs += (toInt(times[1]));
+            secs += (toInt(times[0]) * 60);
+        }
+
+        return secs;
+    }
+
+    /**
+     * to integer
+     * @param time
+     * @return
+     */
+    private static int toInt(String time) {
+        int i = Integer.parseInt(time);
+        return i;
+    }
+
 }

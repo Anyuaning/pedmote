@@ -1,6 +1,7 @@
 package com.anyuaning.osp.ui.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -20,7 +21,9 @@ import com.anyuaning.osp.ui.adapter.TabPagerAdapter;
 import com.anyuaning.osp.ui.base.BaseFragmentActivity;
 import com.anyuaning.osp.ui.fragment.ItemFragment;
 import com.anyuaning.osp.ui.fragment.PullListFragment;
-import com.anyuaning.osp.ui.fragment.stopwatch.StopWatchFragment;
+import com.anyuaning.osp.ui.fragment.sport.CountStepFragment;
+import com.anyuaning.osp.ui.fragment.sport.SportMainFragment;
+import com.anyuaning.osp.ui.fragment.sport.StopWatchFragment;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.extras.viewpager.PullToRefreshViewPager;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -31,7 +34,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class OpenMainActivity extends BaseFragmentActivity implements
-        ActionBar.TabListener, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener {
+        ActionBar.TabListener, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener, CountStepFragment.OnFragmentInteractionListener {
 
     private String[] tabTitles;
 
@@ -58,7 +61,7 @@ public class OpenMainActivity extends BaseFragmentActivity implements
 //        setupView();
 //        setupStopWatch();
 
-        switchContent(new StopWatchFragment());
+        switchContent(new SportMainFragment());
     }
 
     @Override
@@ -105,6 +108,11 @@ public class OpenMainActivity extends BaseFragmentActivity implements
             }
         }, 50);
 
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        // count step fragment
     }
 
     class StopWatchPagerAdapter extends FragmentStatePagerAdapter {

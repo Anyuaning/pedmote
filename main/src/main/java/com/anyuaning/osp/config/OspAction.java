@@ -10,4 +10,6 @@ public class OspAction {
     private OspAction() {}
 
     public static final String ACTION_MUSIC_SERVICE = "com.anyuaning.osp.action.MUSIC_SERVICE";
+
+    public static final String ACTION_STEP_SERVICE = "com.anyuaning.osp.action.STEP_SERVICE";
 }

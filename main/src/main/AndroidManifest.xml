@@ -28,6 +28,12 @@
             </intent-filter>
         </service>
 
+        <service android:name=".service.pendometer.StepService">
+            <itent-filter>
+                <action android:name="com.anyuaning.osp.action.STEP_SERVICE" />
+            </itent-filter>
+        </service>
+
     </application>
 
 </manifest>

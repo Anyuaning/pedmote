@@ -14,7 +14,7 @@ import android.widget.ListView;
 import com.anyuaning.osp.R;
 import com.anyuaning.osp.ui.fragment.music.MusicBrowserFragment;
 import com.anyuaning.osp.ui.fragment.stopwatch.CountDownFragment;
-import com.anyuaning.osp.ui.fragment.stopwatch.StopWatchFragment;
+import com.anyuaning.osp.ui.fragment.sport.StopWatchFragment;
 import com.anyuaning.osp.ui.home.OpenMainActivity;
 
 /**
