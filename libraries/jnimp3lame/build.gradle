@@ -4,7 +4,7 @@ apply plugin: 'android-library'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion "21.1.2"
 
     defaultConfig{
         minSdkVersion 8
@@ -20,7 +20,7 @@ android {
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             ndk {
                 moduleName "jnimp3lame"
