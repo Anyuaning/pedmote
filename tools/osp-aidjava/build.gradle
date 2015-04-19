@@ -4,5 +4,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile project(':libraries:daocore')
-    compile project(':libraries:daogenerator')
+    compile project(':tools:daogenerator')
 }

@@ -1,3 +1,4 @@
+import com.android.build.gradle.tasks.PackageApplication
 
 apply plugin: 'android'
 //apply plugin: 'robolectric'
@@ -15,7 +16,8 @@ dependencies {
     compile project(':libraries:appmsg')
     compile project(':libraries:asynchttp')
     compile project(':libraries:daocore')
-    compile project(':libraries:daogenerator')
+
+    compile project(':libraries:jnimp3lame')
 
 //    robolectricCompile 'org.robolectric:robolectric:2.1'
 //    robolectricCompile group: 'junit', name: 'junit', version: '4.11'
@@ -93,4 +95,17 @@ gradle.projectsEvaluated {
     preBuild.dependsOn(addTest)
 }
 
+// jni so
+task copyNativeLibs(type: Copy) {
+    from fileTree(dir: '../libraries/jnimp3lame/src/main/libs/', include: 'armeabi/*.so') into 'build/lib'
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn copyNativeLibs
+}
+
+clean.dependsOn 'cleanCopyNativeLibs'
+tasks.withType(com.android.build.gradle.tasks.PackageApplication) {
+    pkgTask -> pkgTask.jniFolders = [new File(buildDir, 'lib')]
+}
 

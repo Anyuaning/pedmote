@@ -9,7 +9,6 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import com.anyuaning.osp.sensor.pedometer.StepDetector;
-import com.anyuaning.osp.sensor.pedometer.StepDisplayer;
 
 /**
  * Created by thom on 14-4-23.
@@ -61,9 +60,10 @@ public class StepService extends Service {
         mCallback = cb;
     }
 
-    private StepDisplayer.DisplayListener mStepDisplayListener = new StepDisplayer.DisplayListener() {
+    private StepDisplayer.DisplayListener mStepDisplayListener = new StepDisplayer.DisplayListener<Integer>() {
+
         @Override
-        public void stepsChanged(int value) {
+        public void stepsChanged(Integer value) {
             mSteps = value;
             passValue();
         }

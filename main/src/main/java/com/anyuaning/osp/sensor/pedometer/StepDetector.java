@@ -5,6 +5,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.anyuaning.osp.service.pendometer.StepListener;
+
 import java.util.ArrayList;
 
 /**

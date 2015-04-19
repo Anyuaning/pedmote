@@ -1,0 +1,92 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+apply plugin: 'android-library'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
+
+    defaultConfig{
+        minSdkVersion 8
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    sourceSets.main {
+//        jniLibs.srcDir 'src/main/libs'
+        jni.srcDirs = [] //disable automatic ndk-build call
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            ndk {
+                moduleName "jnimp3lame"
+                abiFilters "armeabi", "armeabi-v7a", "x86"
+            }
+        }
+
+        debug {
+            ndk {
+                moduleName "jnimp3lame"
+                //stl "stlport_shared"
+                ldLibs "log", "z", "m"
+                //cFlags "-Wall -Wextra -I " + projectDir + "/src/main/jni/include"
+                abiFilters "armeabi", "armeabi-v7a", "x86"
+            }
+        }
+    }
+
+//    flavorDimensions "abi"
+
+//    productFlavors {  // target to android plugin
+//        arm {  // need, cannot find symbol
+//            versionCode Integer.parseInt("4" + defaultConfig.versionCode)
+//            ndk {
+//                abiFilter "armeabi"
+//            }
+//        }
+//        x86 {
+////            flavorDimension "abi"
+//            ndk {
+//                abiFilter "x86"
+//            }
+//            versionCode Integer.parseInt("2" + defaultConfig.versionCode)
+//        }
+//        armv7a {
+////            flavorDimension "abi"
+//            ndk {
+//                abiFilter "armeabi-v7a"
+//            }
+//            versionCode Integer.parseInt("1" + defaultConfig.versionCode)
+//        }
+//        all {
+////            flavorDimension "abi"
+//            versionCode Integer.parseInt("0" + defaultConfig.versionCode)
+//        }
+//    }
+
+    // make per-variant version code
+//    applicationVariants.all { variant ->
+//        // get the version code of each flavor
+//        def abiVersion = variant.productFlavors.get(0).versionCode
+//
+//        // set the composite code
+//        variant.mergedFlavor.versionCode = abiVersion * 100000 + defaultConfig.versionCode
+//    }
+
+    // call regular ndk-build(.cmd) script from app directory
+    task ndkBuild(type: Exec) {
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            commandLine 'ndk-build.cmd', '-C', file('src/main').absolutePath
+        } else {
+            commandLine 'ndk-build', '-C', file('src/main').absolutePath
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
+    }
+}

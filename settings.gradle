@@ -9,7 +9,8 @@ include 'libraries:appmsg'
 include 'libraries:asynchttp'
 
 include 'libraries:daocore'
-include 'libraries:daogenerator'
 
+include 'libraries:jnimp3lame'
 
+include 'tools:daogenerator'
 include 'tools:osp-aidjava'

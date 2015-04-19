@@ -16,6 +16,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
 import com.anyuaning.osp.R;
 import com.anyuaning.osp.config.OspAction;
+import com.anyuaning.osp.jnimp3lame.TestNativeMain;
 import com.anyuaning.osp.ui.adapter.TabFragmentPagerAdapter;
 import com.anyuaning.osp.ui.adapter.TabPagerAdapter;
 import com.anyuaning.osp.ui.base.BaseFragmentActivity;
@@ -50,7 +51,6 @@ public class OpenMainActivity extends BaseFragmentActivity implements
 
     private List<Fragment> mListFragment;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,11 @@ public class OpenMainActivity extends BaseFragmentActivity implements
 //        setupStopWatch();
 
         switchContent(new SportMainFragment());
+
+        // test
+        TestNativeMain tnm = new TestNativeMain();
+//        tnm.msg("test native main call native method in openmainactivity"); // can't not find native method
+        tnm.printMsg("test native main call native method in openmainactivity");
     }
 
     @Override
