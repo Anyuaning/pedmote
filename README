@@ -1,5 +1,11 @@
-init
+### libraries
+* actionbarsherlock
+* appmsg
+* daocore
+* dragsortlistview
+* jnimp3lame
+* pulltorefresh
+* slidingmenu
+* viewpagerindicator
 
-android studio create osp
 
-git branch -d origin
