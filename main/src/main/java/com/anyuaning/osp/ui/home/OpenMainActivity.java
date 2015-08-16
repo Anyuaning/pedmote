@@ -21,6 +21,7 @@ import com.anyuaning.osp.ui.adapter.TabFragmentPagerAdapter;
 import com.anyuaning.osp.ui.adapter.TabPagerAdapter;
 import com.anyuaning.osp.ui.base.BaseFragmentActivity;
 import com.anyuaning.osp.ui.fragment.ItemFragment;
+import com.anyuaning.osp.ui.fragment.OnFragmentInteractionListener;
 import com.anyuaning.osp.ui.fragment.PullListFragment;
 import com.anyuaning.osp.ui.fragment.sport.CountStepFragment;
 import com.anyuaning.osp.ui.fragment.sport.SportMainFragment;
@@ -35,7 +36,8 @@ import java.util.List;
 import java.util.Vector;
 
 public class OpenMainActivity extends BaseFragmentActivity implements
-        ActionBar.TabListener, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener, CountStepFragment.OnFragmentInteractionListener {
+        ActionBar.TabListener, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener,
+        OnFragmentInteractionListener {
 
     private String[] tabTitles;
 

@@ -18,12 +18,13 @@ import android.widget.TextView;
 
 import com.anyuaning.osp.R;
 import com.anyuaning.osp.service.pendometer.StepService;
+import com.anyuaning.osp.ui.fragment.OnFragmentInteractionListener;
 import com.anyuaning.osp.utils.StringUtils;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CountStepFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CountStepFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -31,7 +32,7 @@ import com.anyuaning.osp.utils.StringUtils;
  */
 public class CountStepFragment extends Fragment {
 
-    private OnFragmentInteractionListener   mListener;
+    private OnFragmentInteractionListener mListener;
     private Activity                        mActivity;
 
     private StepService                     mStepService;
@@ -99,20 +100,6 @@ public class CountStepFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
     }
 
     public void startStepService() {
