@@ -1,6 +1,7 @@
 package com.anyuaning.osp.service.music;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.os.RemoteException;
 import android.provider.MediaStore;
 
 import com.anyuaning.osp.R;
+import com.anyuaning.osp.broadcast.MediaButtonReceiver;
 import com.anyuaning.osp.exception.MusicPlayerExeception;
 import com.anyuaning.osp.utils.MediaUtils;
 
@@ -58,6 +60,8 @@ public class MusicPlayerService extends Service {
     private AudioManager mAudioManager;
 
     private MultiMusicPlayer mMultiPlayer;
+
+    private ComponentName mComponentMedia;
 
     private boolean isPaused;
 
@@ -180,6 +184,25 @@ public class MusicPlayerService extends Service {
             cursor.moveToFirst();
         }
         return cursor;
+    }
+
+    public static final String PLAYER_ACTION = "com.anyuaning.osp.action.MUSIC_SERVICE";
+
+    public static final String PLAYER_CMDNAME = "cmdname";
+
+    public static final String PLAYER_CMDNEXT = "cmdnext";
+
+    private String mCmdName  = null;
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        mCmdName = intent.getStringExtra(PLAYER_CMDNAME);
+        if (PLAYER_CMDNEXT.equals(mCmdName)) {
+            next();
+        }
+
+        return super.onStartCommand(intent, flags, startId);
     }
 
     /**
@@ -406,11 +429,18 @@ public class MusicPlayerService extends Service {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mAudioManager.unregisterMediaButtonEventReceiver(mComponentMedia);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
+        mComponentMedia = new ComponentName(getPackageName(), MediaButtonReceiver.class.getName());
+        mAudioManager.registerMediaButtonEventReceiver(mComponentMedia);
 
         mMediaPlayer = new MediaPlayer();
 
@@ -586,7 +616,7 @@ public class MusicPlayerService extends Service {
 
         @Override
         public void playNext() throws RemoteException {
-
+            weakReference.get().next();
         }
 
         @Override

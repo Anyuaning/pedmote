@@ -35,6 +35,13 @@
             </itent-filter>
         </service>
 
+        <receiver android:name=".broadcast.MediaButtonReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

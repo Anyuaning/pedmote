@@ -86,7 +86,7 @@ public class MusicBrowserFragment extends Fragment implements ServiceConnection 
 //                        mMusicService.playFile(songPath);
 //                        mMusicService.openFile(songPath);
                         long[] list = getSongListForCursor(cursor);
-                        mMusicService.open(list, position);
+                        mMusicService.open(list, (position - 1));
                         mMusicService.play();
                     } catch (RemoteException e) {
                         e.printStackTrace();
