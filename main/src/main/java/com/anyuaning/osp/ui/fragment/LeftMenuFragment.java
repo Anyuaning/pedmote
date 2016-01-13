@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.anyuaning.osp.R;
 import com.anyuaning.osp.ui.fragment.music.MusicBrowserFragment;
+import com.anyuaning.osp.ui.fragment.sport.SportMainFragment;
 import com.anyuaning.osp.ui.fragment.stopwatch.CountDownFragment;
 import com.anyuaning.osp.ui.fragment.sport.StopWatchFragment;
 import com.anyuaning.osp.ui.home.OpenMainActivity;
@@ -51,8 +52,8 @@ public class LeftMenuFragment extends Fragment {
             getString(R.id.label_menu_settings)
         };
         final Fragment[] listFragment = new Fragment[] {
+                new SportMainFragment(),
                 new StopWatchFragment(),
-                new ItemFragment(),
                 new MusicBrowserFragment(),
                 new ItemFragment(),
                 new CountDownFragment()
