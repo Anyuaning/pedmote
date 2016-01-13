@@ -15,6 +15,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
 import com.anyuaning.osp.R;
+import com.anyuaning.osp.aspect.DebugTrace;
 import com.anyuaning.osp.config.OspAction;
 import com.anyuaning.osp.jnimp3lame.TestNativeMain;
 import com.anyuaning.osp.ui.adapter.TabFragmentPagerAdapter;
@@ -69,6 +70,17 @@ public class OpenMainActivity extends BaseFragmentActivity implements
         TestNativeMain tnm = new TestNativeMain();
 //        tnm.msg("test native main call native method in openmainactivity"); // can't not find native method
         tnm.printMsg("test native main call native method in openmainactivity");
+
+        testAnnotatedMethod();
+    }
+
+    @DebugTrace
+    private void testAnnotatedMethod() {
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

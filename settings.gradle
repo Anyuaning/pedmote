@@ -14,3 +14,5 @@ include 'libraries:jnimp3lame'
 
 include 'tools:daogenerator'
 include 'tools:osp-aidjava'
+
+include 'libraries:osp-aspect'

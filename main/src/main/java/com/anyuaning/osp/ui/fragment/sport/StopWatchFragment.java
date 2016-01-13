@@ -11,6 +11,7 @@ import android.widget.Chronometer;
 
 import com.anyuaning.osp.OspApplication;
 import com.anyuaning.osp.R;
+import com.anyuaning.osp.aspect.DebugTrace;
 import com.anyuaning.osp.dao.DaoSession;
 import com.anyuaning.osp.dao.sport.TimingDao;
 import com.anyuaning.osp.model.sport.Timing;
@@ -63,6 +64,7 @@ public class StopWatchFragment extends Fragment {
     /**
      * start or pause timing
      */
+    @DebugTrace
     public void startOrPauseTiming() {
         if (isRunning) {
             mChronometer.stop();
